@@ -3,9 +3,9 @@ package com.test_spring.demo_spring.dao;
 import com.test_spring.demo_spring.entity.Student;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.TypedQuery;
-import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -33,5 +33,19 @@ public class StudentDAO implements IStudentDAO{
     public List<Student> findAll() {
         TypedQuery<Student> query = entityManager.createQuery("FROM Student",Student.class);
         return query.getResultList();
+    }
+
+    @Override
+    @Transactional
+    public void update(Student theStudent) {
+        entityManager.merge(theStudent);
+    }
+
+    @Override
+    @Transactional
+    public void delete(Integer id) {
+        Student student = entityManager.find(Student.class,id);
+
+        entityManager.remove(student);
     }
 }
