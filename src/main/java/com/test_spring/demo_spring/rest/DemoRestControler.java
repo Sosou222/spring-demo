@@ -39,6 +39,12 @@ public class DemoRestControler {
         return student;
     }
 
-    //@PostMapping()
+    @PostMapping("/students")
+    public Student addStudent(@RequestBody Student theStudent)
+    {
+        theStudent.setId(0);
+        Student dbStudent = studentService.save(theStudent);
+        return dbStudent;
+    }
 
 }

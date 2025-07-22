@@ -21,8 +21,7 @@ public class StudentDAO implements IStudentDAO{
     @Override
     public Student save(Student theStudent) {
 
-        entityManager.persist(theStudent);
-        return theStudent;
+        return entityManager.merge(theStudent);
     }
 
     @Override
