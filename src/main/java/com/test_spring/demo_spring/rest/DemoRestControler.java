@@ -1,5 +1,6 @@
 package com.test_spring.demo_spring.rest;
 
+import com.test_spring.demo_spring.dao.StudentDAO;
 import com.test_spring.demo_spring.entity.Student;
 import com.test_spring.demo_spring.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,6 +46,27 @@ public class DemoRestControler {
         theStudent.setId(0);
         Student dbStudent = studentService.save(theStudent);
         return dbStudent;
+    }
+
+    @PutMapping("/students")
+    public Student updateStudent(@RequestBody Student theStudent)
+    {
+        Student dbStudent = studentService.save(theStudent);
+        return dbStudent;
+    }
+
+    @DeleteMapping("/students/{studentID}")
+    public String deleteStudent(@PathVariable int studentID)
+    {
+        Student student = studentService.findById(studentID);
+
+        if(student == null)
+        {
+            throw new StudentNotFoundException("Student id not found : "+studentID);
+        }
+
+        studentService.delete(studentID);
+        return "Deleted student with id : "+studentID;
     }
 
 }
