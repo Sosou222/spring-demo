@@ -21,8 +21,8 @@ public class DemoSpringApplication {
 	{
 		return runner ->
 		{
-			CreateStudents(studentDAO);
-			ReadStudents(studentDAO);
+			//CreateStudents(studentDAO);
+			//ReadStudents(studentDAO);
 		};
 	}
 
